@@ -3,6 +3,7 @@
   "404": "Esta página no existe",
   "options": {
     "title": "Opciones",
-    "language": "Idioma"
+    "language": "Idioma",
+    "contact_me": "Contáctame"
   }
 }
