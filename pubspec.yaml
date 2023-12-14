@@ -17,6 +17,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.2.2
   flutter_translate: ^4.0.3
+  unicons: ^2.1.1 # https://iconscout.com/unicons/solid-icons
+  auto_size_text: ^3.0.0
+  animate_do: ^3.1.2
 
 dev_dependencies:
   flutter_test:
@@ -28,3 +31,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/i18n/
+  fonts:
+    - family: GochiHand-Regular
+      fonts:
+        - asset: assets/fonts/GochiHand-Regular.ttf
+          weight: 700

@@ -1,1 +1,8 @@
-{}
+{
+  "app_title": "Flutter Demo",
+  "404": "Esta página no existe",
+  "options": {
+    "title": "Opciones",
+    "language": "Idioma"
+  }
+}

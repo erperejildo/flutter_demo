@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/helpers.dart';
 import 'package:flutter_demo/locales.dart';
 import 'package:flutter_demo/pages/landing.dart';
+import 'package:flutter_demo/route_generator.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,11 +39,14 @@ class MyApp extends StatelessWidget {
           localizationDelegate
         ],
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: translate('app_title'),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
+          fontFamily: 'GochiHand-Regular',
         ),
+        initialRoute: '/',
+        onGenerateRoute: RouteGenerator.generateRoute,
         home: const LandingPage(),
       ),
     );

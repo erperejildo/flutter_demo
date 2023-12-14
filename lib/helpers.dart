@@ -9,7 +9,6 @@ class Helpers {
       language = Platform.localeName.split('_')[0]; // default phone language
       prefs.setString('language', language);
     }
-    // final Map optionsMap = json.decode(options.toString());
     return Locale(language, '');
   }
 }

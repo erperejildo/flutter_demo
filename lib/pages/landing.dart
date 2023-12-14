@@ -1,4 +1,7 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:unicons/unicons.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -12,10 +15,30 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('Flutter Demo'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(UniconsLine.bars),
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                '/options',
+              );
+            },
+          )
+        ],
       ),
-      body: Text('hello2'),
+      body: appTitle(),
+    );
+  }
+
+  Widget appTitle() {
+    return JelloIn(
+      child: Center(
+        child: Text(
+          translate('app_title'),
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 90),
+        ),
+      ),
     );
   }
 }
