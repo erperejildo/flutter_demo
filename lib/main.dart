@@ -6,6 +6,8 @@ import 'package:flutter_demo/route_generator.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 late SharedPreferences prefs;
 
@@ -16,7 +18,9 @@ Future<void> main() async {
     fallbackLocale: 'en',
     supportedLocales: languages,
   );
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(LocalizedApp(delegate, const MyApp()));
 }
 
