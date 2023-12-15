@@ -1,7 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/providers/auth.dart';
 import 'package:flutter_demo/widgets/firebase.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
 class LandingPage extends StatefulWidget {
@@ -18,6 +20,22 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Provider.of<Auth>(context).auth.currentUser != null
+            ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      Provider.of<Auth>(context).auth.currentUser?.photoURL ??
+                          ''),
+                ),
+              )
+            : null,
+        title: Provider.of<Auth>(context).auth.currentUser != null
+            ? Text(
+                Provider.of<Auth>(context).auth.currentUser?.email ?? '',
+                style: const TextStyle(fontSize: 15),
+              )
+            : null,
         actions: <Widget>[
           IconButton(
             icon: const Icon(UniconsLine.bars),
@@ -31,7 +49,6 @@ class _LandingPageState extends State<LandingPage> {
       ),
       body:
           //  appTitle(),
-
           DefaultTabController(
         length: 3,
         child: Scaffold(
@@ -63,7 +80,7 @@ class _LandingPageState extends State<LandingPage> {
 
   Widget menu() {
     return Container(
-      color: Colors.red[900],
+      color: Theme.of(context).primaryColor,
       child: const TabBar(
         labelColor: Colors.white,
         unselectedLabelColor: Colors.white,
