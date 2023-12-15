@@ -5,5 +5,11 @@
     "title": "Opciones",
     "language": "Idioma",
     "contact_me": "Contáctame"
+  },
+  "firebase": {
+    "name_field": "Nombre",
+    "photo_field": "Foto URL",
+    "welcome": "Bienvenido a Firebase",
+    "welcome_desc": "Bienvenido a Firebase"
   }
 }

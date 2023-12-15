@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_demo/classes/loading.dart';
+import 'package:flutter_demo/services/firestore.dart';
+import 'package:flutter_demo/types/firestore_user.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -26,7 +28,8 @@ class Auth extends ChangeNotifier {
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;
 
-    if (googleAuth == null) return;
+    // ignore: use_build_context_synchronously
+    if (googleAuth == null) return loading.cancel(context);
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
@@ -34,9 +37,21 @@ class Auth extends ChangeNotifier {
       idToken: googleAuth.idToken,
     );
 
-    await FirebaseAuth.instance.signInWithCredential(credential).then((_) {
+    return await FirebaseAuth.instance
+        .signInWithCredential(credential)
+        .then((data) async {
       notifyListeners();
       loading.cancel(context);
+      final bool newUser = await Firestore().checkNewUser(data.user!.uid);
+      if (newUser) {
+        final FirestoreUser user = FirestoreUser(
+          uid: data.user!.uid,
+          displayName: data.user?.displayName ?? '',
+          photoURL: data.user?.photoURL ?? '',
+        );
+        await Firestore().updateUser(user);
+      }
+      return data;
     });
   }
 

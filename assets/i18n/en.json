@@ -5,5 +5,21 @@
     "title": "Options",
     "language": "Language",
     "contact_me": "Contact me"
+  },
+  "firebase": {
+    "name": "Name",
+    "name_validation": "Please enter some text",
+    "photo": "Photo URL",
+    "photo_validation": "Please enter some valid URL",
+    "submit": "Submit",
+    "sign_out": "Sign out",
+    "sign_in_google": "Sign in with Google",
+    "need_sign_in": "You first need to sign in. After that, you will be able to make some changes to your account.",
+    "welcome": "Welcome to Firebase",
+    "welcome_desc": "You have created a document in Firebase with your user. Now, update it. It will update the avatar and also next time this information will be fetched from the server."
+  },
+  "loads": {
+    "changing_language": "Changing language",
+    "updating_user": "Updating user"
   }
 }

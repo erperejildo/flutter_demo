@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/providers/auth.dart';
 import 'package:flutter_demo/widgets/firebase.dart';
@@ -21,14 +22,7 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
       appBar: AppBar(
         leading: Provider.of<Auth>(context).auth.currentUser != null
-            ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      Provider.of<Auth>(context).auth.currentUser?.photoURL ??
-                          ''),
-                ),
-              )
+            ? photoURL()
             : null,
         title: Provider.of<Auth>(context).auth.currentUser != null
             ? Text(
@@ -62,6 +56,41 @@ class _LandingPageState extends State<LandingPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget photoURL() {
+    // as an example, we are getting the email from Google's API
+    // but the photoURL, it's the one we have saved in Firestore (1st it's also from Google)
+
+    return StreamBuilder<DocumentSnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('users')
+          .doc(Provider.of<Auth>(context).auth.currentUser?.uid)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
+
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
+
+        if (snapshot.hasData && snapshot.data!.exists) {
+          Map<String, dynamic> data =
+              snapshot.data!.data() as Map<String, dynamic>;
+
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(data['photoURL']),
+            ),
+          );
+        } else {
+          return const Text('User does not exist');
+        }
+      },
     );
   }
 
