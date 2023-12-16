@@ -27,6 +27,8 @@ dependencies:
   cloud_firestore: ^4.13.6
   provider: ^6.1.1
   google_mobile_ads: ^4.0.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.8
 
 dev_dependencies:
   flutter_test:
@@ -34,10 +36,31 @@ dev_dependencies:
 
   flutter_lints: ^3.0.1
 
+flutter_icons:
+  android: true
+  ios: false
+  image_path: assets/images/icon.png
+  adaptive_icon_background: assets/images/icon.png
+
+flutter_native_splash:
+  color: "#001a29"
+  image: assets/images/icon.png
+  web: false
+  android_gravity: center 
+  ios_content_mode: scaleAspectFill
+  fullscreen: true
+
+  android_12:
+    color: "#001a29"
+    # icon_background_color: "#fa3541"
+    image: assets/images/icon.png
+    # branding: assets/resources/icon_splash.png
+
 flutter:
   uses-material-design: true
   assets:
     - assets/i18n/
+    - assets/images/
   fonts:
     - family: GochiHand-Regular
       fonts:

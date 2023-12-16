@@ -58,8 +58,10 @@ class _LandingPageState extends State<LandingPage> {
           body: TabBarView(
             children: [
               appTitle(),
-              const Firebase(),
-              const Admob(),
+              // ignore: prefer_const_constructors
+              Firebase(),
+              // ignore: prefer_const_constructors
+              Admob(),
             ],
           ),
         ),
@@ -126,7 +128,7 @@ class _LandingPageState extends State<LandingPage> {
         indicatorColor: Colors.white,
         tabs: [
           Tab(
-            icon: Icon(UniconsLine.abacus),
+            icon: Icon(UniconsLine.grin),
           ),
           Tab(
             icon: Icon(UniconsLine.user),

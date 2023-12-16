@@ -61,7 +61,8 @@ class MyApp extends StatelessWidget {
           ),
           initialRoute: '/',
           onGenerateRoute: RouteGenerator.generateRoute,
-          home: const LandingPage(),
+          // ignore: prefer_const_constructors
+          home: LandingPage(),
         ),
       ),
     );
