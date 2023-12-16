@@ -1,6 +1,8 @@
 {
   "app_title": "Flutter Demo",
   "404": "This page does not exist",
+  "yes": "Yes",
+  "no": "No",
   "options": {
     "title": "Options",
     "language": "Language",
@@ -8,18 +10,29 @@
   },
   "firebase": {
     "name": "Name",
-    "name_validation": "Please enter some text",
     "photo": "Photo URL",
-    "photo_validation": "Please enter some valid URL",
+    "user_error": "User does not exist",
     "submit": "Submit",
-    "sign_out": "Sign out",
-    "sign_in_google": "Sign in with Google",
-    "need_sign_in": "You first need to sign in. After that, you will be able to make some changes to your account.",
+    "submit_error": "Submit (with error)",
+    "log_out": "Log out",
+    "log_in_google": "log in with Google",
+    "need_log_in": "You first need to log in. After that, you will be able to make some changes to your account.",
+    "api_error": "There was an error. Try later.",
     "welcome": "Welcome to Firebase",
     "welcome_desc": "You have created a document in Firebase with your user. Now, update it. It will update the avatar and also next time this information will be fetched from the server."
+  },
+  "admob": {
+    "welcome": "Monetisation: AdMob",
+    "get_rewards": "You can also get some rewards by watching ads:",
+    "watch_video": "Watch video",
+    "confirm_reward": "Did you get the reward?"
   },
   "loads": {
     "changing_language": "Changing language",
     "updating_user": "Updating user"
+  },
+  "validators": {
+    "fill_field": "Fill this field",
+    "url": "Add a valid URL"
   }
 }

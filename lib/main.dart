@@ -1,12 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/helpers.dart';
 import 'package:flutter_demo/locales.dart';
 import 'package:flutter_demo/pages/landing.dart';
+import 'package:flutter_demo/providers/ads.dart';
 import 'package:flutter_demo/providers/auth.dart';
 import 'package:flutter_demo/route_generator.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,6 +25,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  MobileAds.instance.initialize();
   runApp(LocalizedApp(delegate, const MyApp()));
 }
 
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<Auth>(create: (_) => Auth()),
-        // we just use one provider but we could have extra ones in here
+        ChangeNotifierProvider<Ads>(create: (_) => Ads()),
       ],
       child: LocalizationProvider(
         state: LocalizationProvider.of(context).state,
@@ -53,7 +55,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: translate('app_title'),
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
             useMaterial3: true,
             fontFamily: 'GochiHand-Regular',
           ),

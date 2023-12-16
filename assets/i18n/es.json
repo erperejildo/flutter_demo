@@ -1,15 +1,38 @@
 {
   "app_title": "Flutter Demo",
   "404": "Esta página no existe",
+  "yes": "Si",
+  "no": "No",
   "options": {
     "title": "Opciones",
     "language": "Idioma",
     "contact_me": "Contáctame"
   },
   "firebase": {
-    "name_field": "Nombre",
-    "photo_field": "Foto URL",
+    "name": "Nombre",
+    "photo": "Avatar URL",
+    "user_error": "El usuario no existe",
+    "submit": "Enviar",
+    "submit_error": "Enviar (con error)",
+    "log_out": "Log out",
+    "log_in_google": "Log in con Google",
+    "need_log_in": "Primero tienes que logarte. Después, podrás hacer algunos cambios en tu cuenta.",
+    "api_error": "Hubo un problema. Inténtalo más tarde",
     "welcome": "Bienvenido a Firebase",
-    "welcome_desc": "Bienvenido a Firebase"
+    "welcome_desc": "Has creado un documento en Firebase con tu usuario. Ahora, actualízalo. Cambiará el avatar arriba y la próxima vez que entres tendrás los campos actualizados del servidor"
+  },
+  "admob": {
+    "welcome": "Monetización: AdMob",
+    "get_rewards": "También puedes obtener algunas recompensas viendo vídeos",
+    "watch_video": "Ver vídeo",
+    "confirm_reward": "¿Obtuviste la recompensa?"
+  },
+  "loads": {
+    "changing_language": "Cambiando idioma",
+    "updating_user": "Actualizando usuario"
+  },
+  "validators": {
+    "fill_field": "Añade este campo",
+    "url": "Añade una URL válida"
   }
 }

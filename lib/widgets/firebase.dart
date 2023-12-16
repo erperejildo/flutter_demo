@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/classes/loading.dart';
+import 'package:flutter_demo/classes/validators.dart';
 import 'package:flutter_demo/providers/auth.dart';
 import 'package:flutter_demo/services/firestore.dart';
 import 'package:flutter_demo/types/firestore_user.dart';
@@ -39,9 +40,9 @@ class _FirebaseState extends State<Firebase> {
               visible: Provider.of<Auth>(context).auth.currentUser != null,
               child: ElevatedButton(
                 onPressed: () {
-                  Provider.of<Auth>(context, listen: false).signOut(context);
+                  Provider.of<Auth>(context, listen: false).logOut(context);
                 },
-                child: Text(translate('firebase.sign_out')),
+                child: Text(translate('firebase.log_out')),
               ),
             ),
           ],
@@ -55,13 +56,13 @@ class _FirebaseState extends State<Firebase> {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
-          child: Text(translate('firebase.need_sign_in')),
+          child: Text(translate('firebase.need_log_in')),
         ),
         ElevatedButton(
           onPressed: () async {
-            await Provider.of<Auth>(context, listen: false).signIn(context);
+            await Provider.of<Auth>(context, listen: false).logIn(context);
           },
-          child: Text(translate('firebase.sign_in_google')),
+          child: Text(translate('firebase.log_in_google')),
         ),
       ],
     );
@@ -104,7 +105,7 @@ class _FirebaseState extends State<Firebase> {
           // NOTE: in our case, this is not possible
           // because we just created the user after a new signup,
           // but this is good to have anyway
-          return const Text('User does not exist');
+          return Text(translate('firebase.user_error'));
         }
       },
     );
@@ -114,19 +115,38 @@ class _FirebaseState extends State<Firebase> {
     return Form(
       key: _formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           nameTextField(),
           photoTextField(),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  submitForm();
-                }
-              },
-              child: Text(translate('firebase.submit')),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        // example of failing API and how to catch errors
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(translate('firebase.api_error')),
+                          duration: const Duration(seconds: 3),
+                        ));
+                      }
+                    },
+                    child: Text(translate('firebase.submit_error')),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      submitForm();
+                    }
+                  },
+                  child: Text(translate('firebase.submit')),
+                ),
+              ],
             ),
           ),
         ],
@@ -138,10 +158,7 @@ class _FirebaseState extends State<Firebase> {
     return TextFormField(
       controller: _nameController,
       validator: (value) {
-        if (value == null || value.isEmpty) {
-          return translate('firebase.name_validation');
-        }
-        return null;
+        return Validators.checkInput(value!);
       },
       decoration: InputDecoration(
         labelText: translate('firebase.name'),
@@ -154,10 +171,7 @@ class _FirebaseState extends State<Firebase> {
     return TextFormField(
       controller: _photoController,
       validator: (value) {
-        if (value == null || value.isEmpty) {
-          return translate('firebase.photo_validation');
-        }
-        return null;
+        return Validators.checkUrl(value!);
       },
       decoration: InputDecoration(
         labelText: translate('firebase.photo'),

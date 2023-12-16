@@ -1,7 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/providers/ads.dart';
 import 'package:flutter_demo/providers/auth.dart';
+import 'package:flutter_demo/widgets/admob.dart';
 import 'package:flutter_demo/widgets/firebase.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +18,12 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   late AnimationController appTitleController;
+
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<Ads>(context, listen: false).initAds();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +59,7 @@ class _LandingPageState extends State<LandingPage> {
             children: [
               appTitle(),
               const Firebase(),
-              Container(child: Icon(Icons.directions_bike)),
+              const Admob(),
             ],
           ),
         ),
@@ -124,7 +132,7 @@ class _LandingPageState extends State<LandingPage> {
             icon: Icon(UniconsLine.user),
           ),
           Tab(
-            icon: Icon(Icons.account_balance_wallet),
+            icon: Icon(UniconsLine.coins),
           ),
         ],
       ),

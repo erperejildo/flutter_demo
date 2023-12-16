@@ -14,11 +14,11 @@ class Auth extends ChangeNotifier {
     return userLoggedIn;
   }
 
-  Future<dynamic> signIn(BuildContext context) async {
+  Future<dynamic> logIn(BuildContext context) async {
     final loading = Loading();
     await loading.load(
       context,
-      translate('loads.sign_in'),
+      translate('loads.log_in'),
     );
 
     // Trigger the authentication flow
@@ -55,11 +55,11 @@ class Auth extends ChangeNotifier {
     });
   }
 
-  Future<void> signOut(BuildContext context) async {
+  Future<void> logOut(BuildContext context) async {
     final loading = Loading();
     await loading.load(
       context,
-      translate('loads.sign_out'),
+      translate('loads.log_out'),
     );
 
     await auth.signOut().then((_) {
