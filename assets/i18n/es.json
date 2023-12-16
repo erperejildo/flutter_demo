@@ -29,7 +29,9 @@
   },
   "loads": {
     "changing_language": "Cambiando idioma",
-    "updating_user": "Actualizando usuario"
+    "updating_user": "Actualizando usuario",
+    "log_in": "Accediendo",
+    "log_out": "Cerrando"
   },
   "validators": {
     "fill_field": "Añade este campo",
