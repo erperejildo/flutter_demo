@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/audio/sounds.dart';
 import 'package:flutter_demo/helpers.dart';
 import 'package:flutter_demo/locales.dart';
 import 'package:flutter_demo/pages/landing.dart';
@@ -26,7 +27,18 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   MobileAds.instance.initialize();
+  await sounds.initSounds();
+  await detectFirstTime();
   runApp(LocalizedApp(delegate, const MyApp()));
+}
+
+Future<void> detectFirstTime() async {
+  // we can detect the first time the user opens the app
+  // to show slides, popups, etc.
+  var music = prefs.getBool('music');
+  if (music == null) {
+    await prefs.setBool('music', true);
+  }
 }
 
 class MyApp extends StatelessWidget {

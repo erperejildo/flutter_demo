@@ -1,6 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/audio/sounds.dart';
+import 'package:flutter_demo/main.dart';
 import 'package:flutter_demo/providers/ads.dart';
 import 'package:flutter_demo/providers/auth.dart';
 import 'package:flutter_demo/widgets/admob.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_demo/widgets/firebase.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -18,11 +21,21 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   late AnimationController appTitleController;
+  late AudioPlayer backgroundPlayer = AudioPlayer();
+  late bool _music;
 
   @override
   void initState() {
     super.initState();
+    initMusic();
     Provider.of<Ads>(context, listen: false).initAds();
+  }
+
+  void initMusic() async {
+    _music = prefs.getBool('music')!;
+    if (!_music) return;
+
+    sounds.playBackground();
   }
 
   @override

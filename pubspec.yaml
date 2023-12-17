@@ -29,6 +29,7 @@ dependencies:
   google_mobile_ads: ^4.0.0
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.8
+  audioplayers: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -52,13 +53,13 @@ flutter_native_splash:
     color: "#001a29"
     icon_background_color: "#ffffff"
     image: assets/resources/splash.png
-    # branding: assets/resources/icon_splash.png
 
 flutter:
   uses-material-design: true
   assets:
     - assets/i18n/
     - assets/images/
+    - assets/audio/
   fonts:
     - family: GochiHand-Regular
       fonts:

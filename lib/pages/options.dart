@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/audio/sounds.dart';
 import 'package:flutter_demo/classes/loading.dart';
 import 'package:flutter_demo/locales.dart';
 import 'package:flutter_demo/main.dart';
@@ -14,11 +15,13 @@ class OptionsPage extends StatefulWidget {
 
 class OptionsPageState extends State<OptionsPage> {
   late String _language;
+  late bool _music;
 
   @override
   void initState() {
     super.initState();
     _language = prefs.getString('language')!;
+    _music = prefs.getBool('music')!;
   }
 
   @override
@@ -67,6 +70,25 @@ class OptionsPageState extends State<OptionsPage> {
               trailing: const Icon(UniconsLine.arrow_right),
               onTap: () async {
                 contact();
+              },
+            ),
+            ListTile(
+              leading:
+                  Icon(_music ? UniconsLine.volume : UniconsLine.volume_mute),
+              title: Text(translate('options.music')),
+              // subtitle: Text(translate('options.contact_subtitle')),
+              onTap: () async {
+                setState(() {
+                  _music = !_music;
+                });
+
+                if (_music) {
+                  sounds.playBackground();
+                } else {
+                  sounds.stopBackground();
+                }
+
+                prefs.setBool('music', _music);
               },
             ),
           ],

@@ -6,7 +6,8 @@
   "options": {
     "title": "Options",
     "language": "Language",
-    "contact_me": "Contact me"
+    "contact_me": "Contact me",
+    "music": "Music"
   },
   "firebase": {
     "name": "Name",
