@@ -1,16 +1,26 @@
 # flutter_demo
 
-A new Flutter project.
+This is a Flutter demo app with some examples.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Tested on Flutter 3.16.4 but it should work with newer versions as long you keep the same dependencies. Working on Android (emulator and real device).
 
-A few resources to get you started if this is your first Flutter project:
+## Examples:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Shared Preferences](https://docs.flutter.dev/cookbook](https://pub.dev/packages/shared_preferences)https://pub.dev/packages/shared_preferences):
+  - Save info about sounds and language in the phone 
+  - [Code](https://github.com/erperejildo/flutter_demo/blob/main/lib/pages/options.dart#L24)
+ 
+- [Sounds](https://pub.dev/packages/audioplayers):
+  - Play background music 
+  - [Code](https://github.com/erperejildo/flutter_demo/blob/main/lib/audio/sounds.dart) 
+ 
+- [Ads](https://pub.dev/packages/google_mobile_ads):
+  - Use AdMob to show banners and reward ads  
+  - [Code](https://github.com/erperejildo/flutter_demo/blob/main/lib/providers/ads.dart) \
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+    TODO
+
+
