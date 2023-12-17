@@ -6,7 +6,9 @@ This is a Flutter demo app with some examples.
 
 Tested on Flutter 3.16.4 but it should work with newer versions as long you keep the same dependencies. Working on Android (emulator and real device).
 
-To compile run `flutter build apk --release`
+To compile locally run `flutter build apk --release`
+
+To test from Google Play got to https://play.google.com/store/apps/details?id=com.drodriguez.flutter_demo
 
 ## Examples:
 
