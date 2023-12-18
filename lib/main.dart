@@ -5,6 +5,7 @@ import 'package:flutter_demo/locales.dart';
 import 'package:flutter_demo/pages/landing.dart';
 import 'package:flutter_demo/providers/ads.dart';
 import 'package:flutter_demo/providers/auth.dart';
+import 'package:flutter_demo/providers/global.dart';
 import 'package:flutter_demo/route_generator.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -29,16 +30,31 @@ Future<void> main() async {
   MobileAds.instance.initialize();
   await sounds.initSounds();
   await detectFirstTime();
-  runApp(LocalizedApp(delegate, const MyApp()));
+  runApp(
+    LocalizedApp(
+      delegate,
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider<Global>(create: (_) => Global()),
+          ChangeNotifierProvider<Auth>(create: (_) => Auth()),
+          ChangeNotifierProvider<Ads>(create: (_) => Ads()),
+        ],
+        child: const MyApp(),
+      ),
+    ),
+  );
 }
 
-Future<void> detectFirstTime() async {
+Future<bool> detectFirstTime() async {
   // we can detect the first time the user opens the app
   // to show slides, popups, etc.
   var music = prefs.getBool('music');
   if (music == null) {
     await prefs.setBool('music', true);
+    await prefs.setBool('darkMode', false);
+    return true;
   }
+  return false;
 }
 
 class MyApp extends StatelessWidget {
@@ -48,34 +64,34 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizationDelegate = LocalizedApp.of(context).delegate;
 
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<Auth>(create: (_) => Auth()),
-        ChangeNotifierProvider<Ads>(create: (_) => Ads()),
-      ],
-      child: LocalizationProvider(
-        state: LocalizationProvider.of(context).state,
-        child: MaterialApp(
-          locale: Helpers.getSavedLanguage(context),
-          supportedLocales: localizationDelegate.supportedLocales,
-          localizationsDelegates: [
-            GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            localizationDelegate
-          ],
-          debugShowCheckedModeBanner: false,
-          title: translate('app_title'),
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
-            useMaterial3: true,
-            fontFamily: 'GochiHand-Regular',
-          ),
-          initialRoute: '/',
-          onGenerateRoute: RouteGenerator.generateRoute,
-          // ignore: prefer_const_constructors
-          home: LandingPage(),
+    return LocalizationProvider(
+      state: LocalizationProvider.of(context).state,
+      child: MaterialApp(
+        locale: Helpers.getSavedLanguage(context),
+        supportedLocales: localizationDelegate.supportedLocales,
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          localizationDelegate
+        ],
+        debugShowCheckedModeBanner: false,
+        title: translate('app_title'),
+        themeMode: Provider.of<Global>(context).darkMode()
+            ? ThemeMode.dark
+            : ThemeMode.light,
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          fontFamily: 'GochiHand-Regular',
         ),
+        theme: ThemeData(
+          brightness: Brightness.light,
+          fontFamily: 'GochiHand-Regular',
+        ),
+        initialRoute: '/',
+        onGenerateRoute: RouteGenerator.generateRoute,
+        // ignore: prefer_const_constructors
+        home: LandingPage(),
       ),
     );
   }

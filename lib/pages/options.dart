@@ -3,8 +3,11 @@ import 'package:flutter_demo/audio/sounds.dart';
 import 'package:flutter_demo/classes/loading.dart';
 import 'package:flutter_demo/locales.dart';
 import 'package:flutter_demo/main.dart';
+import 'package:flutter_demo/providers/auth.dart';
+import 'package:flutter_demo/providers/global.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
 class OptionsPage extends StatefulWidget {
@@ -64,19 +67,22 @@ class OptionsPageState extends State<OptionsPage> {
               ),
             ),
             ListTile(
-              leading: const Icon(UniconsLine.envelope_alt),
-              title: Text(translate('options.contact_me')),
-              // subtitle: Text(translate('options.contact_subtitle')),
+              leading: Icon(Provider.of<Global>(context).darkMode()
+                  ? UniconsLine.sun
+                  : UniconsLine.moon),
+              title: Text(translate(Provider.of<Global>(context).darkMode()
+                  ? 'options.light_mode'
+                  : 'options.dark_mode')),
+              subtitle: Text(translate('options.dark_mode_tip')),
               trailing: const Icon(UniconsLine.arrow_right),
               onTap: () async {
-                contact();
+                Provider.of<Global>(context, listen: false).changeTheme();
               },
             ),
             ListTile(
               leading:
                   Icon(_music ? UniconsLine.volume : UniconsLine.volume_mute),
               title: Text(translate('options.music')),
-              // subtitle: Text(translate('options.contact_subtitle')),
               onTap: () async {
                 setState(() {
                   _music = !_music;
@@ -89,6 +95,15 @@ class OptionsPageState extends State<OptionsPage> {
                 }
 
                 prefs.setBool('music', _music);
+              },
+            ),
+            ListTile(
+              leading: const Icon(UniconsLine.envelope_alt),
+              title: Text(translate('options.contact_me')),
+              // subtitle: Text(translate('options.contact_subtitle')),
+              trailing: const Icon(UniconsLine.arrow_right),
+              onTap: () async {
+                contact();
               },
             ),
           ],

@@ -6,8 +6,11 @@
   "options": {
     "title": "Opciones",
     "language": "Idioma",
-    "contact_me": "Contáctame",
-    "music": "Música"
+    "light_mode": "Modo claro",
+    "dark_mode": "Modo oscuro",
+    "dark_mode_tip": "El modo oscuro es bueno para tus ojos y batería",
+    "music": "Música",
+    "contact_me": "Contáctame"
   },
   "firebase": {
     "name": "Nombre",
