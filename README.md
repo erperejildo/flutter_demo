@@ -6,13 +6,23 @@ This is a Flutter demo app with some examples.
 
 Tested on Flutter 3.16.4 but it should work with newer versions as long you keep the same dependencies. Working on Android (emulator and real device).
 
-To compile run `flutter build apk --release`
+To compile locally run `flutter build apk --release`
+
+To test from Google Play got to https://play.google.com/store/apps/details?id=com.drodriguez.flutter_demo
 
 ## Examples:
 
 - [Provider](https://pub.dev/packages/provider):
   - State management solution
   - [Code](https://github.com/erperejildo/flutter_demo/tree/main/lib/providers)
+ 
+- [Google sign-in](https://pub.dev/packages/google_sign_in):
+  - Auth method
+  - [Code](https://github.com/erperejildo/flutter_demo/blob/main/lib/providers/auth.dart#L17)
+
+- [Firebase](https://pub.dev/packages/firebase_core):
+  - Server to save user created with Google
+  - [Code](https://github.com/erperejildo/flutter_demo/blob/main/lib/widgets/firebase.dart)
 
 - [Animations](https://pub.dev/packages/animate_do):
   - Simple animation on app title
