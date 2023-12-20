@@ -15,15 +15,19 @@ To test from Google Play got to https://play.google.com/store/apps/details?id=co
 - [Provider](https://pub.dev/packages/provider):
   - State management solution
   - [Code](https://github.com/erperejildo/flutter_demo/tree/main/lib/providers)
- 
-- [Google sign-in](https://pub.dev/packages/google_sign_in):
-  - Auth method
-  - [Code](https://github.com/erperejildo/flutter_demo/blob/main/lib/providers/auth.dart#L17)
+
+- [Dark/light mode]:
+  - Change theme and keep it saved for next time
+  - [Code](https://github.com/erperejildo/flutter_demo/blob/main/lib/main.dart#L80)
 
 - [Firebase](https://pub.dev/packages/firebase_core):
   - Server to save user created with Google
   - [Code](https://github.com/erperejildo/flutter_demo/blob/main/lib/widgets/firebase.dart)
 
+- [Google sign-in](https://pub.dev/packages/google_sign_in):
+  - Auth method
+  - [Code](https://github.com/erperejildo/flutter_demo/blob/main/lib/providers/auth.dart#L17)
+    
 - [Animations](https://pub.dev/packages/animate_do):
   - Simple animation on app title
   - [Code](https://github.com/erperejildo/flutter_demo/blob/main/lib/pages/landing.dart#L121)
