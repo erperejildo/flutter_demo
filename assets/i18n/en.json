@@ -19,7 +19,7 @@
     "submit": "Submit",
     "submit_error": "Submit (with error)",
     "log_out": "Log out",
-    "log_in_google": "log in with Google",
+    "log_in_google": "Log in with Google",
     "need_log_in": "You first need to log in. After that, you will be able to make some changes to your account.",
     "api_error": "There was an error. Try later.",
     "welcome": "Welcome to Firebase",
