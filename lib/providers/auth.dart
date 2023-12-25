@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_demo/classes/loading.dart';
 import 'package:flutter_demo/services/firestore.dart';
 import 'package:flutter_demo/types/firestore_user.dart';
@@ -10,7 +10,7 @@ class Auth extends ChangeNotifier {
   bool userLoggedIn = FirebaseAuth.instance.currentUser != null ? true : false;
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  bool isUsserLoggedIn() {
+  bool isUserLoggedIn() {
     return userLoggedIn;
   }
 
