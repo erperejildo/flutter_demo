@@ -10,10 +10,6 @@ class Auth extends ChangeNotifier {
   bool userLoggedIn = FirebaseAuth.instance.currentUser != null ? true : false;
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  bool isUsserLoggedIn() {
-    return userLoggedIn;
-  }
-
   Future<dynamic> logIn(BuildContext context) async {
     final loading = Loading();
     await loading.load(
