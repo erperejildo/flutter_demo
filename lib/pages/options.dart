@@ -3,7 +3,6 @@ import 'package:flutter_demo/audio/sounds.dart';
 import 'package:flutter_demo/classes/loading.dart';
 import 'package:flutter_demo/locales.dart';
 import 'package:flutter_demo/main.dart';
-import 'package:flutter_demo/providers/auth.dart';
 import 'package:flutter_demo/providers/global.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_translate/flutter_translate.dart';

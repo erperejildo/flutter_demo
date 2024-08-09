@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  // ignore: unused_local_variable
   late SharedPreferences prefs;
 
   testWidgets('detects the first time we open the app',

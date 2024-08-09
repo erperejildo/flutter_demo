@@ -3,10 +3,10 @@ description: "Just a Flutter app demo"
 
 publish_to: 'none'
 
-version: 1.0.2+1.0.2
+version: 1.0.3+1.0.3
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
+  sdk: '>=3.4.4 <4.0.0'
 
 dependencies:
   flutter:
@@ -14,28 +14,28 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  cupertino_icons: ^1.0.6
-  shared_preferences: ^2.2.2
-  flutter_translate: ^4.0.4
-  unicons: ^2.1.1 # some fancy icons: https://iconscout.com/unicons/solid-icons
-  animate_do: ^3.1.2
-  flutter_email_sender: ^6.0.2
-  firebase_core: ^2.24.2
-  firebase_auth: ^4.15.3
+  cupertino_icons: ^1.0.8
+  shared_preferences: ^2.3.1
+  flutter_translate: ^4.1.0
+  unicons: ^2.1.2 # some fancy icons: https://iconscout.com/unicons/solid-icons
+  animate_do: ^3.3.4
+  flutter_email_sender: ^6.0.3
+  firebase_core: ^3.3.0
+  firebase_auth: ^5.1.4
   google_sign_in: '^6.2.1'
-  cloud_firestore: ^4.13.6
-  provider: ^6.1.1
-  google_mobile_ads: ^4.0.0
+  cloud_firestore: ^5.2.1
+  provider: ^6.1.2
+  google_mobile_ads: ^5.1.0
   flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: ^2.3.8
-  audioplayers: ^5.2.1
+  flutter_native_splash: ^2.4.1
+  audioplayers: ^6.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^3.0.1
-  test: ^1.24.9
+  flutter_lints: ^4.0.0
+  test: ^1.25.7
 
 flutter_icons:
   android: true
