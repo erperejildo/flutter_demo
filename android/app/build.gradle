@@ -24,9 +24,13 @@ if (flutterVersionName == null) {
 }
 
 def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('key.properties')
+def keystorePropertiesFile = rootProject.file('../../apps-keys/flutter_demo/key.properties')
+println("Keystore properties file exists: ${keystorePropertiesFile.exists()}")
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    println("Keystore properties loaded: ${keystoreProperties}")
+} else {
+    throw new GradleException("Keystore properties file not found: $keystorePropertiesFile")
 }
 
 android {
