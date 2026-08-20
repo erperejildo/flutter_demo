@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Loading {
   late AlertDialog alert;
 
-  load(BuildContext context, String message) async {
+  Future<void> load(BuildContext context, String message) async {
     alert = AlertDialog(
       content: ListTile(
         leading: const CircularProgressIndicator(),
@@ -20,7 +20,7 @@ class Loading {
     );
   }
 
-  cancel(BuildContext context) async {
+  Future<void> cancel(BuildContext context) async {
     Navigator.pop(context);
   }
 }
