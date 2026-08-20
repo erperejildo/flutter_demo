@@ -7,48 +7,56 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Auth extends ChangeNotifier {
-  bool userLoggedIn = FirebaseAuth.instance.currentUser != null ? true : false;
+  bool get userLoggedIn => FirebaseAuth.instance.currentUser != null;
   final FirebaseAuth auth = FirebaseAuth.instance;
+  static bool _initialized = false;
 
-  Future<dynamic> logIn(BuildContext context) async {
+  Future<void> _init() async {
+    if (_initialized) return;
+    await GoogleSignIn.instance.initialize();
+    _initialized = true;
+  }
+
+  Future<UserCredential?> logIn(BuildContext context) async {
     final loading = Loading();
     await loading.load(
       context,
       translate('loads.log_in'),
     );
 
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    await _init();
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+    final GoogleSignInAccount googleUser;
+    try {
+      googleUser = await GoogleSignIn.instance.authenticate();
+    } on GoogleSignInException catch (e) {
+      // ignore: use_build_context_synchronously
+      await loading.cancel(context);
+      if (e.code == GoogleSignInExceptionCode.canceled) return null;
+      rethrow;
+    }
 
-    // ignore: use_build_context_synchronously
-    if (googleAuth == null) return loading.cancel(context);
+    final GoogleSignInAuthentication googleAuth = googleUser.authentication;
 
-    // Create a new credential
     final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
 
-    return await FirebaseAuth.instance
-        .signInWithCredential(credential)
-        .then((data) async {
-      notifyListeners();
-      loading.cancel(context);
-      final bool newUser = await Firestore().checkNewUser(data.user!.uid);
-      if (newUser) {
-        final FirestoreUser user = FirestoreUser(
-          uid: data.user!.uid,
-          displayName: data.user?.displayName ?? '',
-          photoURL: data.user?.photoURL ?? '',
-        );
-        await Firestore().updateUser(user);
-      }
-      return data;
-    });
+    final data = await FirebaseAuth.instance.signInWithCredential(credential);
+
+    final bool newUser = await Firestore().checkNewUser(data.user!.uid);
+    if (newUser) {
+      final FirestoreUser user = FirestoreUser(
+        uid: data.user!.uid,
+        displayName: data.user?.displayName ?? '',
+        photoURL: data.user?.photoURL ?? '',
+      );
+      await Firestore().updateUser(user);
+    }
+
+    loading.cancel(context);
+    notifyListeners();
+    return data;
   }
 
   Future<void> logOut(BuildContext context) async {
@@ -58,10 +66,10 @@ class Auth extends ChangeNotifier {
       translate('loads.log_out'),
     );
 
-    await auth.signOut().then((_) {
-      notifyListeners();
-      loading.cancel(context);
-    });
+    await auth.signOut();
+
+    loading.cancel(context);
+    notifyListeners();
   }
 }
 
